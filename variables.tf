@@ -1,77 +1,61 @@
-
-variable "create_resource_group" {
-  description = "Determines whether resources will be created (affects all resources)"
-  type        = bool
-  default     = true
-}
-
-# resource group
-
-variable "location" {
-  description = "(Required) The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created."
-  type        = string
-  default     = null
-}
-
+#Module      : LABEL
+#Description : Terraform label module variables.
 variable "name" {
-  description = "(Required) The Name which should be used for this Resource Group. Changing this forces a new Resource Group to be created."
+  description = "Name  (e.g. `app` or `cluster`)."
   type        = string
-  default     = null
+  default     = ""
 }
 
-variable "managed_by" {
-  description = "(Optional) The ID of the resource or application that manages this Resource Group."
+variable "environment" {
+  description = "Environment (e.g. `prod`, `dev`, `staging`)."
   type        = string
-  default     = null
+  default     = ""
 }
 
-variable "create" {
+variable "repository" {
+  description = "Terraform current module repo"
   type        = string
-  default     = "90m"
-  description = "(Defaults to 90 minutes) Used when creating the Resource Group."
+  default     = "https://github.com/eazycloudlife/terraform-azure-labels"
 }
 
-variable "read" {
+variable "business_unit" {
+  description = "Top-level division of your company that owns the subscription or workload that the resource belongs to. In smaller organizations, this tag might represent a single corporate or shared top-level organizational element."
   type        = string
-  default     = "5m"
-  description = "(Defaults to 5 minutes) Used when retrieving the Resource Group."
+  default     = "Corp"
 }
 
-variable "update" {
-  type        = string
-  default     = "90m"
-  description = "(Defaults to 90 minutes) Used when updating the Resource Group.."
+variable "label_order" {
+  description = "Label order, e.g. sequence of application name and environment `name`,`environment`,'attribute' [`webserver`,`qa`,`devops`,`public`,] ."
+  type        = list(any)
+  default     = []
 }
 
-variable "delete" {
-  type        = string
-  default     = "90m"
-  description = "(Defaults to 90 minutes) Used when deleting the Resource Group."
+variable "attributes" {
+  description = "Additional attributes (e.g. `1`)."
+  type        = list(string)
+  default     = []
 }
 
-# management_lock
-
-variable "resource_lock_enabled" {
-  description = "Determines whether resources will be enable or disable lock resource."
-  type        = bool
-  default     = true
-}
-
-variable "lock_level" {
-  description = "(Required) Specifies the Level to be used for this Lock. Possible values are CanNotDelete and ReadOnly. Changing this forces a new resource to be created."
-  type        = string
-  default     = "CanNotDelete"
-}
-
-variable "notes" {
-  description = "(Optional) Specifies some notes about the lock. Maximum of 512 characters. Changing this forces a new resource to be created."
-  type        = string
-  default     = null
-}
-
-variable "tags" {
-  description = "A map of tags to add to all resources"
+variable "extra_tags" {
+  description = "Additional tags (e.g. map(`BusinessUnit`,`XYZ`)."
   type        = map(string)
   default     = {}
 }
 
+variable "managed_by" {
+  description = "managed_by, eg 'EazyCloudLife'."
+  type        = string
+  default     = "eazycloudlife@gmail.com"
+}
+
+variable "enabled" {
+  description = "Set to false to prevent the module from creating any resources."
+  type        = bool
+  default     = true
+}
+
+variable "delimiter" {
+  description = "Delimiter to be used between `organization`, `name`, `environment` and `attributes`."
+  type        = string
+  default     = "-"
+}

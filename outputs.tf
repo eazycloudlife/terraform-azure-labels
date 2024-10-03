@@ -1,14 +1,44 @@
-output "resource_group_id" {
-  description = "The ID of the Resource Group."
-  value       = try(azurerm_resource_group.this[0].id, null)
+#Module      : LABLE
+#Description : This terraform module is designed to generate consistent label names and tags
+#              for resources. You can use terraform-labels to implement a strict naming
+#              convention.
+output "id" {
+  value       = local.id
+  description = "Disambiguated ID."
 }
 
-output "resource_group_name" {
-  description = "The Name which should be used for this Resource Group. Changing this forces a new Resource Group to be created."
-  value       = try(azurerm_resource_group.this[0].name, null)
+output "name" {
+  value       = local.name
+  description = "Normalized name."
 }
 
-output "resource_group_location" {
-  description = "The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created."
-  value       = try(azurerm_resource_group.this[0].location, null)
+output "repository" {
+  value       = local.repository
+  description = "Terraform current module repo"
+}
+
+output "business_unit" {
+  value       = local.business_unit
+  description = "Normalized business_unit"
+}
+
+
+output "environment" {
+  value       = local.environment
+  description = "Normalized environment"
+}
+
+output "attributes" {
+  value       = local.attributes
+  description = "Normalized attributes."
+}
+
+output "tags" {
+  value       = local.tags
+  description = "Normalized Tag map."
+}
+
+output "label_order" {
+  value       = local.label_order
+  description = "Normalized Tag map."
 }
