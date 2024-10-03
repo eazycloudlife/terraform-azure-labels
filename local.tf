@@ -23,12 +23,12 @@ locals {
 
   tags_context = {
     # For Azure we need `Name` to be disambiguated sine it has a special meaning
+    created_by    = "Terraform"
     name          = local.id
     environment   = local.environment
     managed_by    = local.managed_by
     repository    = local.repository
     business_unit = local.business_unit
-
   }
 
   generated_tags = { for l in keys(local.tags_context) : title(l) => local.tags_context[l] if length(local.tags_context[l]) > 0 }
