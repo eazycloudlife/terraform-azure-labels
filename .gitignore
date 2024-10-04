@@ -36,3 +36,5 @@ override.tf.json
 .terraformrc
 terraform.rc
 examples/*/.terraform.lock.hcl
+tests/go.sum
+tests/go.mod

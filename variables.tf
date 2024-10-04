@@ -15,7 +15,7 @@ variable "environment" {
 variable "repository" {
   description = "Terraform current module repo"
   type        = string
-  default     = "https://github.com/eazycloudlife/terraform-azure-labels"
+  default     = "https://github.com/eazycloudlife/terraform-aws-labels"
 }
 
 variable "business_unit" {
